@@ -7,43 +7,42 @@
         <span>提交时间:{{ projectInfo.createTime }}</span>
       </span>
     </div>
-    <hr style="border: 0.5px solid #ccc; width: 96%" />
+    <hr style="border: 0.5px solid #ccc; width: 96%">
     <div class="content">
-      <p v-html="projectInfo.content"></p>
+      <p v-html="projectInfo.content" />
     </div>
-    <hr style="border: 0.5px solid #ccc; width: 96%" />
+    <hr style="border: 0.5px solid #ccc; width: 96%">
     <div class="flooter">
       <span style="font-size: 16px">相关附件：</span>
       <span
-        style="margin: 16px"
         v-for="a in projectInfo.attachments"
         :key="a.projectAttachmentId"
+        style="margin: 16px"
       >
-        {{ a.title }}</span
-      >
+        {{ a.title }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "detail",
+  name: 'Detail',
   components: {},
 
   data() {
     return {
-      projectInfo: {},
-    };
+      projectInfo: {}
+    }
   },
 
   computed: {},
   mounted() {},
   methods: {
     initEditPage(item) {
-      this.projectInfo = item;
-    },
-  },
-};
+      this.projectInfo = item
+    }
+  }
+}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -57,6 +56,9 @@ export default {
   .content {
     padding: 16px;
     min-height: 300px;
+    table{
+      border: 1px soold #666666;
+    }
   }
   .flooter {
     padding: 20px;
