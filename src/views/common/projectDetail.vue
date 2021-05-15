@@ -39,6 +39,9 @@ export default {
   mounted() {},
   methods: {
     initEditPage(item) {
+      if (item.content.indexOf('table') > -1) {
+        item.content = item.content.replace(/border="0"/, "border='1'")
+      }
       this.projectInfo = item
     }
   }

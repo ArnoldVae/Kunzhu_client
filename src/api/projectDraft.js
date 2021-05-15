@@ -2,16 +2,14 @@ import request from '@/utils/request'
 import qs from 'qs'
 
 export function add(data) {
-
   return request({
     url: 'api/projectDraft',
     method: 'post',
-    data:data
+    data: data
   })
 }
 
 export function removeThisProject(ids) {
-  debugger
   return request({
     url: 'api/projectDraft',
     method: 'delete',
@@ -20,17 +18,16 @@ export function removeThisProject(ids) {
 }
 
 export function edit(data) {
-
   return request({
     url: 'api/projectDraft',
     method: 'put',
-    data:data
+    data: data
   })
 }
 export function getProDetail(params) {
   return request({
-    url: 'api/projectDraft/detail'+ '?' + qs.stringify(params, { indices: false }),
-    method: 'get',
+    url: 'api/projectDraft/detail' + '?' + qs.stringify(params, { indices: false }),
+    method: 'get'
   })
 }
 export function fileToDel(ids) {
@@ -62,5 +59,4 @@ export function submitThisProject(id) {
   })
 }
 
-
-export default { add, edit,getProDetail,setHideOrShow,ToCloseApply,submitThisProject }
+export default { add, edit, getProDetail, setHideOrShow, ToCloseApply, submitThisProject }

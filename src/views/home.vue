@@ -2,7 +2,6 @@
   <div class="dashboard-container">
     <el-container>
       <el-aside width="240px">
-        {{ menuTarget }}
         <el-menu
           v-if="$store.getters.currentUserType === '2'"
           v-model="isCollapse"
@@ -14,14 +13,22 @@
         >
           <el-submenu index="0">
             <template slot="title">
-              <el-badge v-if="pointMyAll || pointFollow || pointQusetions" is-dot class="item">
+              <el-badge
+                v-if="pointMyAll || pointFollow || pointQusetions"
+                is-dot
+                class="item"
+              >
                 <span>我的项目</span>
               </el-badge>
               <span v-else>我的项目</span>
             </template>
             <el-menu-item-group>
               <el-menu-item index="1">
-                <el-badge v-if="pointMyAll || pointFollow || pointQusetions" is-dot class="item">
+                <el-badge
+                  v-if="pointMyAll || pointFollow || pointQusetions"
+                  is-dot
+                  class="item"
+                >
                   <span>全部项目</span>
                 </el-badge>
                 <span v-else>全部项目</span>
@@ -69,14 +76,22 @@
         >
           <el-submenu index="0">
             <template slot="title">
-              <el-badge v-if="pointMyAll || pointFollow || pointQusetions" is-dot class="item">
+              <el-badge
+                v-if="pointMyAll || pointFollow || pointQusetions"
+                is-dot
+                class="item"
+              >
                 <span>我的项目</span>
               </el-badge>
               <span v-else>我的项目</span>
             </template>
             <el-menu-item-group>
               <el-menu-item index="1">
-                <el-badge v-if="pointMyAll || pointFollow || pointQusetions" is-dot class="item">
+                <el-badge
+                  v-if="pointMyAll || pointFollow || pointQusetions"
+                  is-dot
+                  class="item"
+                >
                   <span>全部项目</span>
                 </el-badge>
                 <span v-else>全部项目</span>
@@ -119,7 +134,11 @@
           <div v-if="projectStep === 1" class="home_content">
             <div style="height: 40px; line-height: 40px">我的项目</div>
             <div v-if="$store.getters.currentUserType === '1'" class="home_content_btn">
-              <el-button type="danger" style="color: #fff; margin-bottom: 10px" @click="openAddDia">创建项目</el-button>
+              <el-button
+                type="danger"
+                style="color: #fff; margin-bottom: 10px"
+                @click="openAddDia"
+              >创建项目</el-button>
             </div>
             <div v-if="$store.getters.currentUserType === '2'" class="content_th">
               <el-row>
@@ -148,16 +167,25 @@
                         v-if="p.readStatus === '0'"
                         style="font-size: 20px; font-weight: bold"
                         @click="showProDetail(p)"
-                      >{{
-                        p.projectTitle
-                      }}</span>
-                      <span v-if="p.readStatus !== '0'" style="font-size: 20px;" @click="showProDetail(p)">{{
-                        p.projectTitle
-                      }}</span>
-                      <span v-if="p.status === '1'" style="color: forestgreen;">【进行中】</span>
-                      <span v-if="p.status === '2'" style="color:goldenrod;">【跟踪中】</span>
-                      <span v-if="p.status === '3'||p.status === '4'" style="color:red;">【已结束】</span>
-                      <span v-if="p.status === '3'" style="color:red;">
+                      >{{ p.projectTitle }}</span>
+                      <span
+                        v-if="p.readStatus !== '0'"
+                        style="font-size: 20px"
+                        @click="showProDetail(p)"
+                      >{{ p.projectTitle }}</span>
+                      <span
+                        v-if="p.status === '1'"
+                        style="color: forestgreen"
+                      >【进行中】</span>
+                      <span
+                        v-if="p.status === '2'"
+                        style="color: goldenrod"
+                      >【跟踪中】</span>
+                      <span
+                        v-if="p.status === '3' || p.status === '4'"
+                        style="color: red"
+                      >【已结束】</span>
+                      <span v-if="p.status === '3'" style="color: red">
                         <el-tag type="success">合作</el-tag>
                       </span>
                       <span v-if="p.status === '4'">
@@ -165,28 +193,45 @@
                       </span>
                     </li>
                     <li>
-                      <span @click="showProDetail(p)">参考提问{{ p.questionCount }}个/已申请{{ p.applyCount }}人</span>
+                      <span
+                        @click="showProDetail(p)"
+                      >参考提问{{ p.questionCount }}个/已申请{{ p.applyCount }}人</span>
                     </li>
                   </ul>
                 </el-col>
                 <el-col :span="3">
-
-                  <span v-if="p.readStatus === '0'" style=" font-weight: bold">{{ p.createTime }}</span>
+                  <span v-if="p.readStatus === '0'" style="font-weight: bold">{{
+                    p.createTime
+                  }}</span>
                   <span v-if="p.readStatus !== '0'">{{ p.createTime }}</span>
                 </el-col>
                 <el-col :span="3">
-                  <span v-if="p.readStatus === '0'" style=" font-weight: bold">{{ p.endTime }}</span>
+                  <span v-if="p.readStatus === '0'" style="font-weight: bold">{{
+                    p.endTime
+                  }}</span>
                   <span v-if="p.readStatus !== '0'">{{ p.endTime }}</span>
                 </el-col>
                 <el-col :span="4" class="point">
                   <ul>
                     <li>
-                      <span v-if="p.readStatus === '0'" @click="showProDetail(p)">未查看</span>
-                      <span v-if="p.readStatus === '1'" @click="showProDetail(p)">已查看</span>
+                      <span
+                        v-if="p.readStatus === '0'"
+                        @click="showProDetail(p)"
+                      >未查看</span>
+                      <span
+                        v-if="p.readStatus === '1'"
+                        @click="showProDetail(p)"
+                      >已查看</span>
                     </li>
                     <li>
-                      <span v-if="p.applyStatus === '1'" @click="showProDetail(p)">已发申请</span>
-                      <span v-if="p.applyStatus === '0'" @click="showProDetail(p)">未发申请</span>
+                      <span
+                        v-if="p.applyStatus === '1'"
+                        @click="showProDetail(p)"
+                      >已发申请</span>
+                      <span
+                        v-if="p.applyStatus === '0'"
+                        @click="showProDetail(p)"
+                      >未发申请</span>
                     </li>
                     <li>
                       <span>已提问({{ p.questionCount }})</span>
@@ -196,29 +241,42 @@
                   <br>
                 </el-col>
                 <el-col :span="5">
-                  <el-button v-if="p.status === '2'" @click="goFllowApply(p)">进度反馈</el-button>
+                  <el-button
+                    v-if="p.status === '2'"
+                    @click="goFllowApply(p)"
+                  >进度反馈</el-button>
                 </el-col>
               </el-row>
               <el-row v-if="$store.getters.currentUserType === '1'">
-                <el-col :span="7" style="cursor: pointer;">
+                <el-col :span="7" style="cursor: pointer">
                   <span @click="showDraftDetail(p)">{{ p.title }}</span>
                 </el-col>
                 <el-col :span="3"> {{ p.updateTime }} </el-col>
-                <el-col :span="3"> {{ p.createTime }} </el-col>
+                <el-col :span="3"> {{ p.submitTime }} </el-col>
                 <el-col :span="5">
                   <span v-if="p.status === '0'">未提交</span>
-                  <span v-else>待审核</span></span>
+                  <span v-if="p.status === '1'">待审核</span>
+                  <span v-if="p.status === '2'">已发布</span>
+                  <span v-if="p.status === '3'">跟踪中</span>
+                  <span v-if="p.status === '4'">已结束</span>
                 </el-col>
                 <el-col :span="6">
-                  <el-button v-if="p.status === '0'" @click="showModifyDia(p)">修改项目</el-button>
-                  <el-button v-if="p.status === '0'" @click="delThisProject(p)">删除项目</el-button>
-                  <el-button v-if="p.status === '0'" @click="submitProject(p)">提交项目</el-button>
+                  <el-button
+                    v-if="p.status === '0'"
+                    @click="showModifyDia(p)"
+                  >修改项目</el-button>
+                  <el-button
+                    v-if="p.status === '0'"
+                    @click="delThisProject(p)"
+                  >删除项目</el-button>
+                  <el-button
+                    v-if="p.status === '0'"
+                    @click="submitProject(p)"
+                  >提交项目</el-button>
                 </el-col>
               </el-row>
-
             </div>
             <div class="block">
-
               <el-pagination
                 :current-page.sync="currentPage"
                 :page-size="pageSize"
@@ -236,11 +294,45 @@
             <el-row>
               <el-col :span="18">
                 <div class="project_detail">
-                  <div class="title">测试标题</div>
+                  <div v-if="selectRow.projectTitle" class="title">
+                    {{ selectRow.projectTitle }}
+                    <span
+                      v-if="selectRow.status === '1'"
+                      style="color: forestgreen"
+                    >【进行中】</span>
+                    <span
+                      v-if="selectRow.status === '2'"
+                      style="color: goldenrod"
+                    >【跟踪中】</span>
+                    <span
+                      v-if="selectRow.status === '3' || selectRow.status === '4'"
+                      style="color: red"
+                    >【已结束】</span>
+                    <span v-if="selectRow.status === '3'" style="color: red">
+                      <el-tag type="success">合作</el-tag>
+                    </span>
+                    <span v-if="selectRow.status === '4'">
+                      <el-tag type="primary">谢谢参与</el-tag>
+                    </span>
+                  </div>
+                  <div v-if="selectRow.title" class="title">
+                    {{ selectRow.title }}
+                  </div>
                   <div class="content">
-                    <div class="content_title">
-                      参与提问{{ selectRow.questionCount }}人 | 已申请{{
-                        selectRow.applyCount
+                    <div
+                      v-if="$store.getters.currentUserType === '2'"
+                      class="content_title"
+                    >
+                      参与提问{{ selectObj.questionPersonCount }}人 | 已申请{{
+                        selectObj.applyPersonCount
+                      }}人
+                    </div>
+                    <div
+                      v-if="$store.getters.currentUserType === '1'"
+                      class="content_title"
+                    >
+                      参与提问{{ selectObj.questionCount }}个 | 已申请{{
+                        selectObj.applyPersonCount
                       }}人
                     </div>
                     <div class="content_main">
@@ -252,26 +344,41 @@
                         v-for="f in selectObj.attachments"
                         :key="f.projectAttachmentId"
                         class="name"
-                        style="cursor: pointer;"
+                        style="cursor: pointer"
                         @click="showThisOne(f)"
-                      >{{ f.title
-                      }}</span>
+                      >{{ f.title }}</span>
                     </div>
                   </div>
                 </div>
-                <div class="project_detail">
+                <div v-if="$store.getters.currentUserType === '2'" class="project_detail">
                   <div class="title">参考提问</div>
                   <div class="content">
                     <div class="content_main">
-                      <div v-for="p in problemOptions" :key="p.questionId" class="content_main_problems">
+                      <div
+                        v-for="p in problemOptions"
+                        :key="p.questionId"
+                        class="content_main_problems"
+                      >
                         <div class="content_main_problem">
                           <div class="content_main_problem_title">{{ p.content }}</div>
                           <div class="content_main_problem_content">
                             {{ p.createTime }}
+                          </div>
+                          <div class="content_main_problem_content">
+                            相关附件：<span
+                              v-for="f in p.attachments"
+                              :key="f.questionAttachmentId"
+                              style="color: #409eff; margin-right: 16px; cursor: pointer"
+                              @click="showThisOne(f)"
+                            >{{ f.title }}</span>
                             <span style="float: right">{{ p.createBy.alaisName }}</span>
                           </div>
                         </div>
-                        <div v-for="a in p.answers" :key="a.answerId" class="content_main_answer">
+                        <div
+                          v-for="a in p.answers"
+                          :key="a.answerId"
+                          class="content_main_answer"
+                        >
                           <div class="content_main_answer_title">
                             <span style="color: #000; margin-right: 16px">官方回复:</span>
                             {{ a.content }}
@@ -290,14 +397,70 @@
                 <div class="project_sys">
                   <ul>
                     <li>
-                      <el-button v-if="$store.getters.currentUserType === '2'" type="primary" @click="setQuestions">提出问题</el-button>
+                      <el-button
+                        v-if="
+                          $store.getters.currentUserType === '2' &&
+                            selectRow.status !== '4' &&
+                            selectRow.status !== '3'
+                        "
+                        type="primary"
+                        @click="setQuestions"
+                      >提出问题</el-button>
                     </li>
                     <li>
-                      <el-button v-if="selectRow.applyStatus === '0'&&$store.getters.currentUserType === '2'" type="primary" plain @click="submitApply">提交申请
+                      <el-button
+                        v-if="
+                          selectRow.applyStatus === '0' &&
+                            $store.getters.currentUserType === '2' &&
+                            selectRow.status !== '4' &&
+                            selectRow.status !== '3'
+                        "
+                        type="primary"
+                        plain
+                        @click="submitApply"
+                      >提交申请
                       </el-button>
                     </li>
                     <li>
-                      <el-button v-if="$store.getters.currentUserType === '2'" type="primary" plain @click="followApply">进度反馈</el-button>
+                      <el-button
+                        v-if="
+                          $store.getters.currentUserType === '2' &&
+                            selectRow.status !== '4' &&
+                            selectRow.status !== '3'
+                        "
+                        type="primary"
+                        plain
+                        @click="followApply"
+                      >进度反馈</el-button>
+                    </li>
+                    <li>
+                      <el-button
+                        v-if="
+                          $store.getters.currentUserType === '1' &&
+                            selectRow.status === '0'
+                        "
+                        type="danger"
+                        @click="submitProject(selectRow)"
+                      >提交项目</el-button>
+                    </li>
+                    <li>
+                      <el-button
+                        v-if="
+                          $store.getters.currentUserType === '1' &&
+                            selectRow.status === '0'
+                        "
+                        type="danger"
+                        plain
+                        @click="showModifyDia(selectRow)"
+                      >编辑项目</el-button>
+                    </li>
+
+                    <li>
+                      <el-button
+                        type="warning"
+                        plain
+                        @click="backItem"
+                      >返回列表</el-button>
                     </li>
                   </ul>
                 </div>
@@ -404,8 +567,14 @@
                 </div>
                 <div v-for="f in followOptions" :key="f.feedbackId" class="follow_item">
                   <div class="follow_item_title">
-                    <span v-if="f.accessType === '2'" style="color: rgb(19, 136, 247); margin-right: 20px">进度反馈</span>
-                    <span v-if="f.accessType === '1'" style="color: rgb(221, 115, 31); margin-right: 20px">跟踪询问</span>
+                    <span
+                      v-if="f.accessType === '2'"
+                      style="color: rgb(19, 136, 247); margin-right: 20px"
+                    >进度反馈</span>
+                    <span
+                      v-if="f.accessType === '1'"
+                      style="color: rgb(221, 115, 31); margin-right: 20px"
+                    >跟踪询问</span>
                     {{ f.content }}
                   </div>
                   <div class="follow_item_content">
@@ -686,6 +855,9 @@ export default {
     })
   },
   methods: {
+    backItem() {
+      this.projectStep = 1
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`)
     },
@@ -858,7 +1030,6 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log(this.ruleForm)
-          debugger
           if (this.menuTarget === 'modifyInfo') {
             setUserInfo({
               ...this.ruleForm2
@@ -923,7 +1094,6 @@ export default {
           page: this.currentPage - 1,
           size: this.pageSize,
           questionStatus: target + ''
-
         }
       } else {
         if (target === NaN || !target || target === -1) {
@@ -939,7 +1109,8 @@ export default {
       const res = await getPartnerProject(_data)
       console.log(res)
       if (res) {
-        res.content.forEach(item => {
+        this.projectStep = 1
+        res.content.forEach((item) => {
           if (!item.updateTime) {
             item.updateTime = '---- --------  --:--:--'
           }
@@ -952,6 +1123,8 @@ export default {
       }
     },
     async getClientsProjects(target) {
+      target = target === '1' ? '' : target - 1
+      target = !target ? '' : target
       const res = await getClientProjects({
         status: target,
         page: this.currentPage - 1,
@@ -964,10 +1137,11 @@ export default {
           if (!item.updateTime) {
             item.updateTime = '---- ---- --:--'
           }
-          if (!item.endTime) {
-            item.endTime = '---- ---- --:--'
+          if (!item.submitTime) {
+            item.submitTime = '---- ---- --:--'
           }
         })
+        this.projectStep = 1
         this.projectOptions = res.content
         this.totalNum = res.totalElements
       }
@@ -975,10 +1149,13 @@ export default {
     async getQuestions(item) {
       const res = await getProjectQuestions({ projectId: item.projectId })
       if (res) {
-        res.content.forEach(item => {
+        res.content.forEach((item) => {
           if (item.createBy) {
             if (item.createBy.username.length > 3) {
-              item.createBy.alaisName = item.createBy.username.substring(0, 3) + '***' + item.createBy.username.substr(item.createBy.username.length - 1, 1)
+              item.createBy.alaisName =
+                item.createBy.username.substring(0, 3) +
+                '***' +
+                item.createBy.username.substr(item.createBy.username.length - 1, 1)
             }
           }
         })
@@ -1028,6 +1205,9 @@ export default {
       this.getQuestions(item)
       console.log(res)
       this.selectObj = res
+      if (res.content.indexOf('table') > -1) {
+        res.content = res.content.replace(/border="0"/, "border='1'")
+      }
       this.projectStep = 2
     },
     async showDraftDetail(item) {
@@ -1037,6 +1217,10 @@ export default {
       })
       this.getQuestions(item)
       console.log(res)
+      if (res.content.indexOf('table') > -1) {
+        res.content = res.content.replace(/border="0"/, "border='1'")
+      }
+
       this.selectObj = res
       this.projectStep = 2
     },
@@ -1104,279 +1288,279 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  .point {
-    cursor: pointer;
-    line-height: 20px;
-  }
+.point {
+  cursor: pointer;
+  line-height: 20px;
+}
 
-  .dashboard-container {
-    color: #606266;
+.dashboard-container {
+  color: #606266;
 
-    .el-container {
-      padding: 40px;
+  .el-container {
+    padding: 40px;
 
-      .el-aside {
-        background: #fff;
-        padding-top: 16px;
-      }
+    .el-aside {
+      background: #fff;
+      padding-top: 16px;
+    }
 
-      .el-main {
-        .home_content {
-          .home_content_btn {
-            color: #fff;
+    .el-main {
+      .home_content {
+        .home_content_btn {
+          color: #fff;
+        }
+
+        .content_th {
+          width: 100%;
+          height: 80px;
+          line-height: 80px;
+          background: #dedee4;
+
+          .el-row {
+            .el-col {
+              text-align: center;
+            }
           }
+        }
 
-          .content_th {
-            width: 100%;
+        .content_tr {
+          height: 120px;
+          width: 100%;
+          margin-top: 16px;
+          border: 1px solid #dedee4;
+          line-height: 120px;
+
+          .el-row {
+            .el-col {
+              text-align: center;
+
+              ul {
+                li {
+                  line-height: 20px;
+                  padding-left: 25%;
+                  text-align: left;
+                  list-style-type: none;
+                  margin-bottom: 10px;
+                }
+              }
+            }
+          }
+        }
+
+        .project_detail {
+          border: 1px solid #ccc;
+          width: 100%;
+          min-height: 20vh;
+          margin-bottom: 20px;
+
+          .title {
             height: 80px;
             line-height: 80px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+            padding-left: 20px;
+          }
+
+          .content {
+            padding: 20px;
+
+            .content_title {
+              font-size: 14px;
+              color: #515151;
+            }
+
+            position: relative;
+
+            .content_main {
+              min-height: 30vh;
+              padding-top: 20px;
+
+              .content_main_problems {
+                border-bottom: 1px solid #dedee4;
+                margin-bottom: 16px;
+
+                .content_main_problem {
+                  border-bottom: 1px dashed #ccc;
+
+                  padding: 10px 16px;
+
+                  .content_main_problem_title {
+                    word-break: break-all;
+                    min-height: 40px;
+                    line-height: 40px;
+                  }
+
+                  .content_main_problem_content {
+                    height: 40px;
+                    line-height: 40px;
+                  }
+                }
+
+                .content_main_answer {
+                  padding: 4px 36px;
+
+                  .content_main_answer_title {
+                    word-break: break-all;
+                    color: rgba(230, 15, 15, 1);
+                    min-height: 32px;
+                    line-height: 32px;
+                  }
+
+                  .content_main_answer_content {
+                    height: 32px;
+                    line-height: 32px;
+                  }
+                }
+              }
+            }
+
+            .content_bottom {
+              height: 50px;
+
+              font-size: 14px;
+              bottom: 1%;
+              line-height: 50px;
+
+              .name {
+                color: #409eff;
+                margin-right: 16px;
+              }
+            }
+          }
+        }
+
+        .questions {
+          margin-top: 20px;
+          min-height: 60vh;
+          width: 90%;
+          border: 1px solid #dedee4;
+
+          .questions_th {
+            height: 8vh;
+            width: 100%;
+            line-height: 8vh;
             background: #dedee4;
 
             .el-row {
               .el-col {
-                text-align: center;
+                padding-left: 16px;
               }
             }
           }
 
-          .content_tr {
-            height: 120px;
+          .questions_td {
             width: 100%;
-            margin-top: 16px;
-            border: 1px solid #dedee4;
-            line-height: 120px;
+            padding: 16px;
 
             .el-row {
               .el-col {
-                text-align: center;
+                .content_right_title {
+                  width: 100%;
+                  line-height: 20px;
 
-                ul {
-                  li {
-                    line-height: 20px;
-                    padding-left: 25%;
-                    text-align: left;
-                    list-style-type: none;
-                    margin-bottom: 10px;
-                  }
-                }
-              }
-            }
-          }
-
-          .project_detail {
-            border: 1px solid #ccc;
-            width: 100%;
-            min-height: 20vh;
-            margin-bottom: 20px;
-
-            .title {
-              height: 80px;
-              line-height: 80px;
-              border-bottom: 1px solid #ccc;
-              text-align: left;
-              padding-left: 20px;
-            }
-
-            .content {
-              padding: 20px;
-
-              .content_title {
-                font-size: 14px;
-                color: #515151;
-              }
-
-              position: relative;
-
-              .content_main {
-                min-height: 30vh;
-                padding-top: 20px;
-
-                .content_main_problems {
-                  border-bottom: 1px solid #dedee4;
                   margin-bottom: 16px;
-
-                  .content_main_problem {
-                    border-bottom: 1px dashed #ccc;
-
-                    padding: 10px 16px;
-
-                    .content_main_problem_title {
-                      word-break: break-all;
-                      min-height: 40px;
-                      line-height: 40px;
-                    }
-
-                    .content_main_problem_content {
-                      height: 40px;
-                      line-height: 40px;
-                    }
-                  }
-
-                  .content_main_answer {
-                    padding: 4px 36px;
-
-                    .content_main_answer_title {
-                      word-break: break-all;
-                      color: rgba(230, 15, 15, 1);
-                      min-height: 32px;
-                      line-height: 32px;
-                    }
-
-                    .content_main_answer_content {
-                      height: 32px;
-                      line-height: 32px;
-                    }
-                  }
                 }
-              }
 
-              .content_bottom {
-                height: 50px;
-
-                font-size: 14px;
-                bottom: 1%;
-                line-height: 50px;
-
-                .name {
-                  color: #409eff;
-                  margin-right: 16px;
+                .content_right_main {
+                  line-height: normal;
                 }
               }
             }
           }
 
-          .questions {
-            margin-top: 20px;
-            min-height: 60vh;
-            width: 90%;
-            border: 1px solid #dedee4;
-
-            .questions_th {
-              height: 8vh;
-              width: 100%;
-              line-height: 8vh;
-              background: #dedee4;
-
-              .el-row {
-                .el-col {
-                  padding-left: 16px;
-                }
-              }
-            }
-
-            .questions_td {
-              width: 100%;
-              padding: 16px;
-
-              .el-row {
-                .el-col {
-                  .content_right_title {
-                    width: 100%;
-                    line-height: 20px;
-
-                    margin-bottom: 16px;
-                  }
-
-                  .content_right_main {
-                    line-height: normal;
-                  }
-                }
-              }
-            }
-
-            .questions_file {
-              line-height: 50px;
-            }
-          }
-
-          .submit_btn {
-            height: 80px;
-            width: 100%;
-            text-align: center;
-            line-height: 80px;
-
-            button {
-              width: 30%;
-              height: 45px;
-              font-size: 16px;
-            }
-          }
-
-          .follow {
-            padding: 24px 12px;
-            margin-top: 16px;
-            background: rgb(244, 243, 243);
-
-            .follow_main {
-              padding: 16px;
-              min-height: 30vh;
-              background: #fff;
-              border: 1px solid #ccc;
-
-              .follow_title {
-                height: 48px;
-                line-height: 48px;
-                font-size: 24px;
-                border-bottom: 1px solid #ccc;
-              }
-
-              .follow_txt {
-                .follow_txt_title {
-                  height: 48px;
-                  line-height: 48px;
-                  font-weight: bold;
-                }
-
-                .follow_txt_btn {
-                  height: 40px;
-                  line-height: 40px;
-                }
-              }
-
-              .follow_item {
-                border-bottom: 1px dashed #ccc;
-
-                .follow_item_title {
-                  height: 40px;
-                  line-height: 40px;
-                }
-
-                .follow_item_content {
-                  height: 40px;
-                  line-height: 40px;
-                }
-              }
-            }
+          .questions_file {
+            line-height: 50px;
           }
         }
 
-        .pwd {
-          padding: 36px;
-          width: 50%;
-          margin: auto;
-        }
-
-        .project_sys {
-          padding: 30px;
-
-          ul {
-            li {
-              list-style-type: none;
-            }
-          }
+        .submit_btn {
+          height: 80px;
+          width: 100%;
+          text-align: center;
+          line-height: 80px;
 
           button {
-            width: 90%;
-            height: 32px;
-            font-size: 14px;
-            margin-bottom: 16px;
+            width: 30%;
+            height: 45px;
+            font-size: 16px;
           }
+        }
+
+        .follow {
+          padding: 24px 12px;
+          margin-top: 16px;
+          background: rgb(244, 243, 243);
+
+          .follow_main {
+            padding: 16px;
+            min-height: 30vh;
+            background: #fff;
+            border: 1px solid #ccc;
+
+            .follow_title {
+              height: 48px;
+              line-height: 48px;
+              font-size: 24px;
+              border-bottom: 1px solid #ccc;
+            }
+
+            .follow_txt {
+              .follow_txt_title {
+                height: 48px;
+                line-height: 48px;
+                font-weight: bold;
+              }
+
+              .follow_txt_btn {
+                height: 40px;
+                line-height: 40px;
+              }
+            }
+
+            .follow_item {
+              border-bottom: 1px dashed #ccc;
+
+              .follow_item_title {
+                height: 40px;
+                line-height: 40px;
+              }
+
+              .follow_item_content {
+                height: 40px;
+                line-height: 40px;
+              }
+            }
+          }
+        }
+      }
+
+      .pwd {
+        padding: 36px;
+        width: 50%;
+        margin: auto;
+      }
+
+      .project_sys {
+        padding: 30px;
+
+        ul {
+          li {
+            list-style-type: none;
+          }
+        }
+
+        button {
+          width: 90%;
+          height: 32px;
+          font-size: 14px;
+          margin-bottom: 16px;
         }
       }
     }
   }
+}
 
-  .el-menu-item {
-    color: #606266;
-  }
+.el-menu-item {
+  color: #606266;
+}
 </style>
