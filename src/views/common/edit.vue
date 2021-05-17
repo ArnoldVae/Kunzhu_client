@@ -9,7 +9,7 @@
       label-width="100px"
     >
       <el-form-item label="项目标题" prop="title">
-        <el-input v-model="form.title" style="width: 646px" />
+        <el-input v-model="form.title" style="width: 96%" />
       </el-form-item>
 
       <el-form-item label="项目内容"> </el-form-item>
@@ -251,7 +251,7 @@ export default {
 .editor {
   text-align: left;
   margin: 20px;
-  width: 730px;
+  width: 96%;
 }
 ::v-deep .w-e-text-container {
   height: 360px !important;

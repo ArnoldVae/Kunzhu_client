@@ -138,13 +138,14 @@
                 type="danger"
                 style="color: #fff; margin-bottom: 10px"
                 @click="openAddDia"
-              >创建项目</el-button>
+                >创建项目</el-button
+              >
             </div>
             <div v-if="$store.getters.currentUserType === '2'" class="content_th">
               <el-row>
-                <el-col :span="9"> 项目名称 </el-col>
-                <el-col :span="3"> 发布日期 </el-col>
-                <el-col :span="3"> 截止日期 </el-col>
+                <el-col :span="7"> 项目名称 </el-col>
+                <el-col :span="4"> 发布日期 </el-col>
+                <el-col :span="4"> 截止日期 </el-col>
                 <el-col :span="4"> 参与状态 </el-col>
                 <el-col :span="5"> 参与操作 </el-col>
               </el-row>
@@ -152,60 +153,52 @@
             <div v-if="$store.getters.currentUserType === '1'" class="content_th">
               <el-row>
                 <el-col :span="7"> 项目名称 </el-col>
-                <el-col :span="3"> 上次修改日期 </el-col>
-                <el-col :span="3"> 提交日期 </el-col>
-                <el-col :span="5"> 状态 </el-col>
-                <el-col :span="6"> 参与操作 </el-col>
+                <el-col :span="4"> 上次修改日期 </el-col>
+                <el-col :span="4"> 提交日期 </el-col>
+                <el-col :span="2"> 状态 </el-col>
+                <el-col :span="7"> 参与操作 </el-col>
               </el-row>
             </div>
             <div v-for="p in projectOptions" :key="p.id" class="content_tr">
               <el-row v-if="$store.getters.currentUserType === '2'">
-                <el-col :span="9" class="point">
-                  <ul>
-                    <li>
-                      <span
-                        v-if="p.readStatus === '0'"
-                        style="font-size: 20px; font-weight: bold"
-                        @click="showProDetail(p)"
-                      >{{ p.projectTitle }}</span>
-                      <span
-                        v-if="p.readStatus !== '0'"
-                        style="font-size: 20px"
-                        @click="showProDetail(p)"
-                      >{{ p.projectTitle }}</span>
-                      <span
-                        v-if="p.status === '1'"
-                        style="color: forestgreen"
-                      >【进行中】</span>
-                      <span
-                        v-if="p.status === '2'"
-                        style="color: goldenrod"
-                      >【跟踪中】</span>
-                      <span
-                        v-if="p.status === '3' || p.status === '4'"
-                        style="color: red"
-                      >【已结束】</span>
-                      <span v-if="p.status === '3'" style="color: red">
-                        <el-tag type="success">合作</el-tag>
-                      </span>
-                      <span v-if="p.status === '4'">
-                        <el-tag type="primary">谢谢参与</el-tag>
-                      </span>
-                    </li>
-                    <li>
-                      <span
-                        @click="showProDetail(p)"
-                      >参考提问{{ p.questionCount }}个/已申请{{ p.applyCount }}人</span>
-                    </li>
-                  </ul>
+                <el-col :span="7" class="point">
+                  <div style="position: relative; padding-top: 20px">
+                    <span
+                      v-if="p.readStatus === '0'"
+                      style="font-size: 20px; font-weight: bold"
+                      @click="showProDetail(p)"
+                      >{{ p.projectTitle }}</span
+                    >
+                    <span
+                      v-if="p.readStatus !== '0'"
+                      style="font-size: 20px"
+                      @click="showProDetail(p)"
+                      >{{ p.projectTitle }}</span
+                    >
+                    <span v-if="p.status === '1'" style="color: forestgreen"
+                      >【进行中】</span
+                    >
+                    <span v-if="p.status === '2'" style="color: goldenrod"
+                      >【跟踪中】</span
+                    >
+                    <span v-if="p.status === '3' || p.status === '4'" style="color: red"
+                      >【已结束】</span
+                    >
+                    <span v-if="p.status === '3'" style="color: red">
+                      <el-tag type="success">合作</el-tag>
+                    </span>
+                    <span v-if="p.status === '4'">
+                      <el-tag type="primary">谢谢参与</el-tag>
+                    </span>
+                  </div>
                 </el-col>
-                <el-col :span="3">
+                <el-col :span="4">
                   <span v-if="p.readStatus === '0'" style="font-weight: bold">{{
                     p.createTime
                   }}</span>
                   <span v-if="p.readStatus !== '0'">{{ p.createTime }}</span>
                 </el-col>
-                <el-col :span="3">
+                <el-col :span="4">
                   <span v-if="p.readStatus === '0'" style="font-weight: bold">{{
                     p.endTime
                   }}</span>
@@ -214,65 +207,60 @@
                 <el-col :span="4" class="point">
                   <ul>
                     <li>
-                      <span
-                        v-if="p.readStatus === '0'"
-                        @click="showProDetail(p)"
-                      >未查看</span>
-                      <span
-                        v-if="p.readStatus === '1'"
-                        @click="showProDetail(p)"
-                      >已查看</span>
+                      <span v-if="p.readStatus === '0'" @click="showProDetail(p)"
+                        >未查看</span
+                      >
+                      <span v-if="p.readStatus === '1'" @click="showProDetail(p)"
+                        >已查看</span
+                      >
                     </li>
                     <li>
-                      <span
-                        v-if="p.applyStatus === '1'"
-                        @click="showProDetail(p)"
-                      >已发申请</span>
-                      <span
-                        v-if="p.applyStatus === '0'"
-                        @click="showProDetail(p)"
-                      >未发申请</span>
+                      <span v-if="p.applyStatus === '1'" @click="showProDetail(p)"
+                        >已发申请</span
+                      >
+                      <span v-if="p.applyStatus === '0'" @click="showProDetail(p)"
+                        >未发申请</span
+                      >
                     </li>
                     <li>
                       <span>已提问({{ p.questionCount }})</span>
                     </li>
+                    <li>
+                      <span>已反馈({{ p.feedbackCount }})</span>
+                    </li>
                   </ul>
 
-                  <br>
+                  <br />
                 </el-col>
                 <el-col :span="5">
-                  <el-button
-                    v-if="p.status === '2'"
-                    @click="goFllowApply(p)"
-                  >进度反馈</el-button>
+                  <el-button v-if="p.status === '2'" @click="goFllowApply(p)"
+                    >进度反馈</el-button
+                  >
                 </el-col>
               </el-row>
               <el-row v-if="$store.getters.currentUserType === '1'">
                 <el-col :span="7" style="cursor: pointer">
                   <span @click="showDraftDetail(p)">{{ p.title }}</span>
                 </el-col>
-                <el-col :span="3"> {{ p.updateTime }} </el-col>
-                <el-col :span="3"> {{ p.submitTime }} </el-col>
-                <el-col :span="5">
+                <el-col :span="4"> {{ p.updateTime }} </el-col>
+                <el-col :span="4"> {{ p.submitTime }} </el-col>
+                <el-col :span="2">
                   <span v-if="p.status === '0'">未提交</span>
                   <span v-if="p.status === '1'">待审核</span>
                   <span v-if="p.status === '2'">已发布</span>
                   <span v-if="p.status === '3'">跟踪中</span>
                   <span v-if="p.status === '4'">已结束</span>
                 </el-col>
-                <el-col :span="6">
-                  <el-button
-                    v-if="p.status === '0'"
-                    @click="showModifyDia(p)"
-                  >修改项目</el-button>
-                  <el-button
-                    v-if="p.status === '0'"
-                    @click="delThisProject(p)"
-                  >删除项目</el-button>
-                  <el-button
-                    v-if="p.status === '0'"
-                    @click="submitProject(p)"
-                  >提交项目</el-button>
+                <el-col :span="7">
+                  <el-button v-if="p.status === '0'" @click="showModifyDia(p)"
+                    >修改项目</el-button
+                  >
+                  <el-button v-if="p.status === '0'" @click="delThisProject(p)"
+                    >删除项目</el-button
+                  >
+                  <el-button v-if="p.status === '0'" @click="submitProject(p)"
+                    >提交项目</el-button
+                  >
                 </el-col>
               </el-row>
             </div>
@@ -296,18 +284,17 @@
                 <div class="project_detail">
                   <div v-if="selectRow.projectTitle" class="title">
                     {{ selectRow.projectTitle }}
-                    <span
-                      v-if="selectRow.status === '1'"
-                      style="color: forestgreen"
-                    >【进行中】</span>
-                    <span
-                      v-if="selectRow.status === '2'"
-                      style="color: goldenrod"
-                    >【跟踪中】</span>
+                    <span v-if="selectRow.status === '1'" style="color: forestgreen"
+                      >【进行中】</span
+                    >
+                    <span v-if="selectRow.status === '2'" style="color: goldenrod"
+                      >【跟踪中】</span
+                    >
                     <span
                       v-if="selectRow.status === '3' || selectRow.status === '4'"
                       style="color: red"
-                    >【已结束】</span>
+                      >【已结束】</span
+                    >
                     <span v-if="selectRow.status === '3'" style="color: red">
                       <el-tag type="success">合作</el-tag>
                     </span>
@@ -319,7 +306,7 @@
                     {{ selectRow.title }}
                   </div>
                   <div class="content">
-                    <div
+                    <!-- <div
                       v-if="$store.getters.currentUserType === '2'"
                       class="content_title"
                     >
@@ -334,19 +321,20 @@
                       参与提问{{ selectObj.questionCount }}个 | 已申请{{
                         selectObj.applyPersonCount
                       }}人
-                    </div>
+                    </div> -->
                     <div class="content_main">
                       <p v-html="selectObj.content" />
                     </div>
                     <div class="content_bottom">
-                      <span>相关附件:</span>
+                      <span v-if="selectObj.attachments.length > 0">相关附件:</span>
                       <span
                         v-for="f in selectObj.attachments"
                         :key="f.projectAttachmentId"
                         class="name"
                         style="cursor: pointer"
                         @click="showThisOne(f)"
-                      >{{ f.title }}</span>
+                        >{{ f.title }}</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -365,12 +353,20 @@
                             {{ p.createTime }}
                           </div>
                           <div class="content_main_problem_content">
-                            相关附件：<span
-                              v-for="f in p.attachments"
-                              :key="f.questionAttachmentId"
-                              style="color: #409eff; margin-right: 16px; cursor: pointer"
-                              @click="showThisOne(f)"
-                            >{{ f.title }}</span>
+                            <span v-if="p.attachments.length > 0">
+                              相关附件：<span
+                                v-for="f in p.attachments"
+                                :key="f.questionAttachmentId"
+                                style="
+                                  color: #409eff;
+                                  margin-right: 16px;
+                                  cursor: pointer;
+                                "
+                                @click="showThisOne(f)"
+                                >{{ f.title }}</span
+                              >
+                            </span>
+
                             <span style="float: right">{{ p.createBy.alaisName }}</span>
                           </div>
                         </div>
@@ -400,67 +396,69 @@
                       <el-button
                         v-if="
                           $store.getters.currentUserType === '2' &&
-                            selectRow.status !== '4' &&
-                            selectRow.status !== '3'
+                          selectRow.status !== '4' &&
+                          selectRow.status !== '3'
                         "
                         type="primary"
                         @click="setQuestions"
-                      >提出问题</el-button>
+                        >提出问题</el-button
+                      >
                     </li>
                     <li>
                       <el-button
                         v-if="
                           selectRow.applyStatus === '0' &&
-                            $store.getters.currentUserType === '2' &&
-                            selectRow.status !== '4' &&
-                            selectRow.status !== '3'
+                          $store.getters.currentUserType === '2' &&
+                          selectRow.status !== '4' &&
+                          selectRow.status !== '3'
                         "
                         type="primary"
                         plain
                         @click="submitApply"
-                      >提交申请
+                        >提交申请
                       </el-button>
                     </li>
                     <li>
                       <el-button
                         v-if="
                           $store.getters.currentUserType === '2' &&
-                            selectRow.status !== '4' &&
-                            selectRow.status !== '3'
+                          selectRow.status !== '4' &&
+                          selectRow.status !== '3'
                         "
                         type="primary"
                         plain
                         @click="followApply"
-                      >进度反馈</el-button>
+                        >进度反馈</el-button
+                      >
                     </li>
                     <li>
                       <el-button
                         v-if="
                           $store.getters.currentUserType === '1' &&
-                            selectRow.status === '0'
+                          selectRow.status === '0'
                         "
                         type="danger"
                         @click="submitProject(selectRow)"
-                      >提交项目</el-button>
+                        >提交项目</el-button
+                      >
                     </li>
                     <li>
                       <el-button
                         v-if="
                           $store.getters.currentUserType === '1' &&
-                            selectRow.status === '0'
+                          selectRow.status === '0'
                         "
                         type="danger"
                         plain
                         @click="showModifyDia(selectRow)"
-                      >编辑项目</el-button>
+                        >编辑项目</el-button
+                      >
                     </li>
 
                     <li>
-                      <el-button
-                        type="warning"
-                        plain
-                        @click="backItem"
-                      >返回列表</el-button>
+                      <el-button type="warning" plain @click="backItem"
+                        >返回列表</el-button
+                      >
                     </li>
                   </ul>
                 </div>
@@ -570,11 +568,13 @@
                     <span
                       v-if="f.accessType === '2'"
                       style="color: rgb(19, 136, 247); margin-right: 20px"
-                    >进度反馈</span>
+                      >进度反馈</span
+                    >
                     <span
                       v-if="f.accessType === '1'"
                       style="color: rgb(221, 115, 31); margin-right: 20px"
-                    >跟踪询问</span>
+                      >跟踪询问</span
+                    >
                     {{ f.content }}
                   </div>
                   <div class="follow_item_content">
@@ -656,7 +656,7 @@
       :before-close="closeAdd"
       :visible.sync="addFlag"
       title="创建项目"
-      width="48%"
+      width="80%"
     >
       <Add ref="add" @closeDia="closeDia" />
       <div slot="footer" class="dialog-footer">
@@ -671,7 +671,7 @@
       :before-close="closeModify"
       :visible.sync="modifyFlag"
       title="项目修改"
-      width="48%"
+      width="80%"
     >
       <Edit ref="edit" :select-item="selectItem" @closeDia="closeModify" />
       <div slot="footer" class="dialog-footer">
@@ -684,20 +684,20 @@
 </template>
 
 <script>
-import GithubCorner from '@/components/GithubCorner'
-import PanelGroup from './dashboard/PanelGroup'
-import LineChart from './dashboard/LineChart'
-import RadarChart from '@/components/Echarts/RadarChart'
-import { mapGetters } from 'vuex'
-import moment from 'moment'
-import { encrypt } from '@/utils/rsaEncrypt'
-import Add from './common/add'
-import Edit from './common/edit'
-import PieChart from '@/components/Echarts/PieChart'
-import { getToken } from '@/utils/auth'
-import CRUD, { presenter, header, form, crud } from '@crud/crud'
-import BarChart from '@/components/Echarts/BarChart'
-import { getProDetail, submitThisProject, removeThisProject } from '@/api/projectDraft'
+import GithubCorner from "@/components/GithubCorner";
+import PanelGroup from "./dashboard/PanelGroup";
+import LineChart from "./dashboard/LineChart";
+import RadarChart from "@/components/Echarts/RadarChart";
+import { mapGetters } from "vuex";
+import moment from "moment";
+import { encrypt } from "@/utils/rsaEncrypt";
+import Add from "./common/add";
+import Edit from "./common/edit";
+import PieChart from "@/components/Echarts/PieChart";
+import { getToken } from "@/utils/auth";
+import CRUD, { presenter, header, form, crud } from "@crud/crud";
+import BarChart from "@/components/Echarts/BarChart";
+import { getProDetail, submitThisProject, removeThisProject } from "@/api/projectDraft";
 import {
   getPartnerProject,
   getPartnerProjectDetail,
@@ -707,13 +707,13 @@ import {
   setProjectApply,
   getProjectFollow,
   setProjectFollow,
-  getClientProjects
-} from '@/api/home'
-import { setUserPwd, setUserInfo } from '@/api/user'
-const lineChartData = {}
+  getClientProjects,
+} from "@/api/home";
+import { setUserPwd, setUserInfo } from "@/api/user";
+const lineChartData = {};
 
 export default {
-  name: 'Dashboard',
+  name: "Dashboard",
   components: {
     GithubCorner,
     PanelGroup,
@@ -722,41 +722,41 @@ export default {
     PieChart,
     BarChart,
     Add,
-    Edit
+    Edit,
   },
   cruds() {
-    return CRUD({ title: '文件', url: 'api/files', crudMethod: { ...crudFile }})
+    return CRUD({ title: "文件", url: "api/files", crudMethod: { ...crudFile } });
   },
   mixins: [crud()],
 
   computed: {
-    ...mapGetters(['annexUploadApi', 'baseApi']),
-    currentUserType: function() {
-      return this.$store.getters.currentUserType
-    }
+    ...mapGetters(["annexUploadApi", "baseApi"]),
+    currentUserType: function () {
+      return this.$store.getters.currentUserType;
+    },
   },
   watch: {
     currentUserType: {
       handler(val) {
-        console.log(val + 'zhege')
-        if (val === '1') {
-          this.getClientsProjects()
+        console.log(val + "zhege");
+        if (val === "1") {
+          this.getClientsProjects();
         } else {
-          this.getProjects()
+          this.getProjects();
         }
-      }
-    }
+      },
+    },
   },
   data() {
     var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入新密码'))
+      if (value === "") {
+        callback(new Error("请再次输入新密码"));
       } else if (value !== this.ruleForm.pass) {
-        callback(new Error('两次输入密码不一致!'))
+        callback(new Error("两次输入密码不一致!"));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
     return {
       pageSize: 30,
       currentPage: 0,
@@ -764,75 +764,77 @@ export default {
       lineChartData: lineChartData.newVisitis,
       noticeTypeOptions: [
         {
-          label: '邮件通知',
-          code: '1'
+          label: "邮件通知",
+          code: "1",
         },
         {
-          label: '短信通知',
-          code: '2'
-        }
+          label: "短信通知",
+          code: "2",
+        },
       ],
       pointFollow: false,
       pointQusetions: false,
       pointMyAll: false,
       totalNum: 0,
-      openeds: ['0', '6'],
+      openeds: ["0", "6"],
       noticeType: [],
       isCollapse: true,
       addFlag: false,
       modifyFlag: false,
       showDetailFlag: false,
-      followDetail: '',
+      followDetail: "",
       selectItem: {},
       flieSelectedList: [],
       selectRow: {},
-      questionDetail: '',
+      questionDetail: "",
       projectStep: 1,
-      selectObj: {},
-      menuTarget: '',
+      selectObj: {
+        attachments: [],
+      },
+      menuTarget: "",
       problemOptions: [],
       projectOptions: [],
       headers: { Authorization: getToken() },
 
       uploadData: {
-        uploadType: '2'
+        uploadType: "2",
       },
       followOptions: [],
 
       ruleForm: {
-        pass: '',
-        checkPass: '',
-        oldPass: ''
+        pass: "",
+        checkPass: "",
+        oldPass: "",
       },
       ruleForm2: {},
       rules: {
-        oldPass: [{ required: true, message: '请输入旧密码', trigger: 'blur' }],
-        pass: [{ required: true, message: '请输入新密码', trigger: 'blur' }],
-        checkPass: [{ required: true, validator: validatePass2, trigger: 'blur' }]
+        oldPass: [{ required: true, message: "请输入旧密码", trigger: "blur" }],
+        pass: [{ required: true, message: "请输入新密码", trigger: "blur" }],
+        checkPass: [{ required: true, validator: validatePass2, trigger: "blur" }],
       },
       rules2: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        gender: [{ required: true, message: '请选择性别', trigger: 'blur' }],
-        realName: [{ required: true, message: '请输入真实名字', trigger: 'blur' }],
-        phone: [{ required: true, message: '请输入电话号码', trigger: 'blur' }],
-        email: [{ required: true, message: '请输入电子邮箱', trigger: 'blur' }]
-      }
-    }
+        username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+        gender: [{ required: true, message: "请选择性别", trigger: "blur" }],
+        realName: [{ required: true, message: "请输入真实名字", trigger: "blur" }],
+        phone: [{ required: true, message: "请输入电话号码", trigger: "blur" }],
+        email: [{ required: true, message: "请输入电子邮箱", trigger: "blur" }],
+      },
+    };
   },
   mounted() {
-    if (this.$store.getters.currentUserType === '1') {
-      this.getClientsProjects()
+    if (this.$store.getters.currentUserType === "1") {
+      this.getClientsProjects();
     } else {
-      this.getProjects()
+      this.getProjects();
     }
 
-    this.subscribe('markers')
-    this.ruleForm2 = this.$store.getters.user
-    this.ruleForm2.gender = '1'
-    this.$_mqtt.on('message', (topic, message) => {
-      console.log('mqtt收到推送信息')
-      const msgJson = JSON.parse(message.toString())
-      console.log(msgJson)
+    this.subscribe("markers");
+    this.ruleForm2 = this.$store.getters.user;
+    this.ruleForm2.gender = "1";
+    this.$_mqtt.on("message", (topic, message) => {
+      console.log("mqtt收到推送信息");
+      const msgJson = JSON.parse(message.toString());
+      console.log(msgJson);
       // msgJson = {
       //   functionCode: "0202",
       //   functionName: "进度反馈",
@@ -842,408 +844,416 @@ export default {
       //   remark: "",
       // };
       if (msgJson.partnerId === this.$store.getters.user.id) {
-        if (msgJson.functionCode === '0202') {
-          this.pointFollow = true
+        if (msgJson.functionCode === "0202") {
+          this.pointFollow = true;
         }
-        if (msgJson.functionCode === '0201') {
-          this.pointQusetions = true
+        if (msgJson.functionCode === "0201") {
+          this.pointQusetions = true;
         }
-        if (msgJson.functionCode === '0102') {
-          this.pointMyAll = true
+        if (msgJson.functionCode === "0102") {
+          this.pointMyAll = true;
         }
       }
-    })
+    });
   },
   methods: {
     backItem() {
-      this.projectStep = 1
+      this.projectStep = 1;
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`)
+      console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`)
-      if (this.$store.getters.currentUserType === '1') {
-        this.getClientsProjects(key)
+      console.log(`当前页: ${val}`);
+      if (this.$store.getters.currentUserType === "1") {
+        this.getClientsProjects(key);
       } else {
-        this.getProjects(key)
+        this.getProjects(key);
       }
     },
     showThisOne(file) {
-      const url = this.getCaption(file.url)
+      const url = this.getCaption(file.url);
 
-      console.log(url)
-      window.open(this.baseApi + '/' + url)
+      console.log(url);
+      window.open(this.baseApi + "/" + url);
     },
     async goProjectSubmit(id) {
-      const res = await submitThisProject(id[0])
+      const res = await submitThisProject(id[0]);
       this.$message({
-        type: 'success',
-        message: '提交成功!'
-      })
-      if (this.$store.getters.currentUserType === '1') {
-        this.getClientsProjects()
+        type: "success",
+        message: "提交成功!",
+      });
+      if (this.$store.getters.currentUserType === "1") {
+        this.getClientsProjects();
       } else {
-        this.getProjects()
+        this.getProjects();
       }
     },
     // 项目提交
     submitProject(item) {
-      this.$confirm('提交这个项目, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("提交这个项目, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(() => {
-          this.goProjectSubmit([item.draftId])
+          this.goProjectSubmit([item.draftId]);
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消操作'
-          })
-        })
+            type: "info",
+            message: "已取消操作",
+          });
+        });
     },
     delThisProject(item) {
-      this.$confirm('删除这个项目, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("删除这个项目, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(() => {
           removeThisProject([item.draftId]).then((res) => {
-            this.$message.success('操作成功!')
-            this.getClientsProjects()
-          })
+            this.$message.success("操作成功!");
+            this.getClientsProjects();
+          });
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消操作'
-          })
-        })
+            type: "info",
+            message: "已取消操作",
+          });
+        });
     },
     async showModifyDia(item) {
       const res = await getProDetail({
-        draftId: item.draftId
-      })
+        draftId: item.draftId,
+      });
 
-      console.log(res)
+      console.log(res);
       if (res) {
         if (res.attachments.length > 0) {
           res.attachments.forEach((f) => {
-            f.name = f.title
-          })
+            f.name = f.title;
+          });
         }
-        this.modifyFlag = true
+        this.modifyFlag = true;
         setTimeout(() => {
-          this.$refs['edit'].initPage(res)
-        }, 100)
+          this.$refs["edit"].initPage(res);
+        }, 100);
       }
     },
 
     addPaojectSubmot(target) {
-      this.$refs['add'].doSubmit(target)
+      this.$refs["add"].doSubmit(target);
     },
     editSubmit(target) {
-      this.$refs['edit'].doSubmit(target)
+      this.$refs["edit"].doSubmit(target);
     },
 
     openAddDia() {
-      this.addFlag = true
+      this.addFlag = true;
       setTimeout(() => {
-        this.$refs['add'].clearForm()
-      })
+        this.$refs["add"].clearForm();
+      });
     },
     closeAdd() {
-      this.addFlag = false
+      this.addFlag = false;
     },
     closeDia() {
-      this.addFlag = false
-      if (this.$store.getters.currentUserType === '1') {
-        this.getClientsProjects()
+      this.addFlag = false;
+      if (this.$store.getters.currentUserType === "1") {
+        this.getClientsProjects();
       } else {
-        this.getProjects()
+        this.getProjects();
       }
     },
     closeModify() {
-      this.modifyFlag = false
-      if (this.$store.getters.currentUserType === '1') {
-        this.getClientsProjects()
+      this.modifyFlag = false;
+      if (this.$store.getters.currentUserType === "1") {
+        this.getClientsProjects();
       } else {
-        this.getProjects()
+        this.getProjects();
       }
     },
     // 订阅topic
     subscribe(topic) {
       this.$_mqtt.unsubscribe(topic, (err) => {
         if (err) {
-          console.log('取消鲲烛订阅失败')
+          console.log("取消鲲烛订阅失败");
         } else {
-          console.log('取消鲲烛订阅成功')
+          console.log("取消鲲烛订阅成功");
           this.$_mqtt.subscribe(topic, (err) => {
             if (err) {
-              console.log('鲲烛订阅失败!')
+              console.log("鲲烛订阅失败!");
             } else {
-              console.log('鲲烛订阅成功!')
+              console.log("鲲烛订阅成功!");
             }
-          })
+          });
         }
-      })
+      });
     },
     submitClientFollow() {
+      if (this.followDetail.length < 1) {
+        this.$message.warning("反馈内容不能为空!");
+        return;
+      }
       const _data = {
         content: this.followDetail,
-        dataSource: 'web',
+        dataSource: "web",
         noticeType: [],
         projectId: this.selectRow.projectId,
-        partnerId: this.selectRow.partnerId
-      }
+        partnerId: this.selectRow.partnerId,
+      };
       setProjectFollow(_data).then((res) => {
-        this.$message.success('操作成功!')
-        this.followDetail = ''
-        this.noticeType = []
+        this.$message.success("操作成功!");
+        this.followDetail = "";
+        this.noticeType = [];
         getProjectFollow({
           projectId: this.selectRow.projectId,
-          partnerId: this.selectRow.partnerId
+          partnerId: this.selectRow.partnerId,
         }).then((res) => {
-          this.followOptions = res.content
-        })
-      })
+          this.followOptions = res.content;
+        });
+      });
     },
     goFllowApply(item) {
-      this.selectRow = item
-      this.followDetail = ''
-      this.followApply()
+      this.selectRow = item;
+      this.followDetail = "";
+      this.followApply();
     },
     followApply() {
-      this.followDetail = ''
+      this.followDetail = "";
       getProjectFollow({
         projectId: this.selectRow.projectId,
-        partnerId: this.selectRow.partnerId
+        partnerId: this.selectRow.partnerId,
       }).then((res) => {
-        this.followOptions = res.content
-        this.projectStep = 4
-      })
+        this.followOptions = res.content;
+        this.projectStep = 4;
+      });
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(this.ruleForm)
-          if (this.menuTarget === 'modifyInfo') {
+          console.log(this.ruleForm);
+          if (this.menuTarget === "modifyInfo") {
             setUserInfo({
-              ...this.ruleForm2
+              ...this.ruleForm2,
             }).then((res) => {
-              this.$message.success('操作成功!')
-            })
+              this.$message.success("操作成功!");
+            });
           } else {
             setUserPwd({
               newPass: encrypt(this.ruleForm.pass),
-              oldPass: encrypt(this.ruleForm.oldPass)
+              oldPass: encrypt(this.ruleForm.oldPass),
             }).then((res) => {
-              this.$message.success('操作成功!')
-            })
+              this.$message.success("操作成功!");
+            });
           }
         } else {
-          console.log('error submit!!')
-          return false
+          console.log("error submit!!");
+          return false;
         }
-      })
+      });
     },
 
     resetForm(formName) {
-      this.$refs[formName].resetFields()
+      this.$refs[formName].resetFields();
     },
     questionSubmit() {
-      console.log(this.flieSelectedList)
+      console.log(this.flieSelectedList);
+      if (this.questionDetail.length < 1) {
+        this.$message.warning("反馈内容不能为空!");
+        return;
+      }
       const _data = {
         answers: [],
         attachments: [],
-        content: 'string',
-        dataSource: 'web',
-        projectId: 0
-      }
+        content: "string",
+        dataSource: "web",
+        projectId: 0,
+      };
 
       this.flieSelectedList.forEach((item) => {
         _data.attachments.push({
           questionAttachmentId: item.response.fileId,
           title: item.name,
           uploadTime: item.uploadTime,
-          url: item.response.fileUrl
-        })
-      })
-      _data.content = this.questionDetail
-      _data.dataSource = ''
-      _data.projectId = this.selectObj.projectId
+          url: item.response.fileUrl,
+        });
+      });
+      _data.content = this.questionDetail;
+      _data.dataSource = "";
+      _data.projectId = this.selectObj.projectId;
       setProjectQuestions(_data).then((res) => {
-        this.$message.success('操作成功!')
-        this.projectStep = 2
-        this.getQuestions(this.selectRow)
-        console.log(res)
-      })
+        this.$message.success("操作成功!");
+        this.projectStep = 2;
+        this.getQuestions(this.selectRow);
+        console.log(res);
+      });
     },
 
     async getProjects(target) {
-      target = target === '1' ? '' : target
+      target = target === "1" ? "" : target;
 
-      let _data = {}
-      target = Number(target) - 1
+      let _data = {};
+      target = Number(target) - 1;
       if (target === 1) {
         _data = {
           partnerId: this.$store.getters.user.id,
           page: this.currentPage - 1,
           size: this.pageSize,
-          questionStatus: target + ''
-        }
+          questionStatus: target + "",
+        };
       } else {
         if (target === NaN || !target || target === -1) {
-          target = ''
+          target = "";
         }
         _data = {
           partnerId: this.$store.getters.user.id,
           page: this.currentPage - 1,
           size: this.pageSize,
-          status: target
-        }
+          status: target,
+        };
       }
-      const res = await getPartnerProject(_data)
-      console.log(res)
+      const res = await getPartnerProject(_data);
+      console.log(res);
       if (res) {
-        this.projectStep = 1
+        this.projectStep = 1;
         res.content.forEach((item) => {
           if (!item.updateTime) {
-            item.updateTime = '---- --------  --:--:--'
+            item.updateTime = "---- --------  --:--:--";
           }
           if (!item.endTime) {
-            item.endTime = '---- --------  --:--:--'
+            item.endTime = "---- --------  --:--:--";
           }
-        })
-        this.projectOptions = res.content
-        this.totalNum = res.totalElements
+        });
+        this.projectOptions = res.content;
+        this.totalNum = res.totalElements;
       }
     },
     async getClientsProjects(target) {
-      target = target === '1' ? '' : target - 1
-      target = !target ? '' : target
+      target = target === "1" ? "" : target - 1;
+      target = !target ? "" : target;
       const res = await getClientProjects({
         status: target,
         page: this.currentPage - 1,
         size: this.pageSize,
-        sort: ['update_time,desc']
-      })
-      console.log(res)
+        sort: ["update_time,desc"],
+      });
+      console.log(res);
       if (res) {
         res.content.forEach((item) => {
           if (!item.updateTime) {
-            item.updateTime = '---- ---- --:--'
+            item.updateTime = "---- ---- --:--";
           }
           if (!item.submitTime) {
-            item.submitTime = '---- ---- --:--'
+            item.submitTime = "---- ---- --:--";
           }
-        })
-        this.projectStep = 1
-        this.projectOptions = res.content
-        this.totalNum = res.totalElements
+        });
+        this.projectStep = 1;
+        this.projectOptions = res.content;
+        this.totalNum = res.totalElements;
       }
     },
     async getQuestions(item) {
-      const res = await getProjectQuestions({ projectId: item.projectId })
+      const res = await getProjectQuestions({ projectId: item.projectId });
       if (res) {
         res.content.forEach((item) => {
           if (item.createBy) {
             if (item.createBy.username.length > 3) {
               item.createBy.alaisName =
                 item.createBy.username.substring(0, 3) +
-                '***' +
-                item.createBy.username.substr(item.createBy.username.length - 1, 1)
+                "***" +
+                item.createBy.username.substr(item.createBy.username.length - 1, 1);
             }
           }
-        })
-        this.problemOptions = res.content
-        console.log(res)
+        });
+        this.problemOptions = res.content;
+        console.log(res);
       }
     },
     handleOpen(key, keyPath) {
-      console.log(key, keyPath)
+      console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath)
+      console.log(key, keyPath);
     },
     handleSelect(key, keyPath) {
-      console.log(key, keyPath)
-      if (key === '3') {
-        this.pointFollow = false
+      console.log(key, keyPath);
+      if (key === "3") {
+        this.pointFollow = false;
       }
-      if (key === '0') {
-        this.pointMyAll = false
+      if (key === "0") {
+        this.pointMyAll = false;
       }
-      if (key === '1') {
-        this.pointMyAll = false
+      if (key === "1") {
+        this.pointMyAll = false;
       }
-      if (key === '2') {
-        this.pointQusetions = false
+      if (key === "2") {
+        this.pointQusetions = false;
       }
-      if (this.menuTarget === 'modifyPwd') {
-        this.$refs['ruleForm'].resetFields()
+      if (this.menuTarget === "modifyPwd") {
+        this.$refs["ruleForm"].resetFields();
       }
 
-      this.menuTarget = key === 'modifyPwd' ? key : key === 'modifyInfo' ? key : ''
-      if (key === '1' || key === '2' || key === '3' || key === '4' || key === '5') {
-        if (this.$store.getters.currentUserType === '1') {
-          this.getClientsProjects(key)
+      this.menuTarget = key === "modifyPwd" ? key : key === "modifyInfo" ? key : "";
+      if (key === "1" || key === "2" || key === "3" || key === "4" || key === "5") {
+        if (this.$store.getters.currentUserType === "1") {
+          this.getClientsProjects(key);
         } else {
-          this.getProjects(key)
+          this.getProjects(key);
         }
       }
-      this.projectStep = 1
+      this.projectStep = 1;
     },
     async showProDetail(item) {
-      this.selectRow = item
+      this.selectRow = item;
       const res = await getPartnerProjectDetail({
-        projectId: item.projectId
-      })
-      this.getQuestions(item)
-      console.log(res)
-      this.selectObj = res
-      if (res.content.indexOf('table') > -1) {
-        res.content = res.content.replace(/border="0"/, "border='1'")
+        projectId: item.projectId,
+      });
+      this.getQuestions(item);
+      console.log(res);
+      this.selectObj = res;
+      if (res.content.indexOf("table") > -1) {
+        res.content = res.content.replace(/border="0"/, "border='1'");
       }
-      this.projectStep = 2
+      this.projectStep = 2;
     },
     async showDraftDetail(item) {
-      this.selectRow = item
+      this.selectRow = item;
       const res = await getPartnerProjectDetail2({
-        draftId: item.draftId
-      })
-      this.getQuestions(item)
-      console.log(res)
-      if (res.content.indexOf('table') > -1) {
-        res.content = res.content.replace(/border="0"/, "border='1'")
+        draftId: item.draftId,
+      });
+      this.getQuestions(item);
+      console.log(res);
+      if (res.content.indexOf("table") > -1) {
+        res.content = res.content.replace(/border="0"/, "border='1'");
       }
 
-      this.selectObj = res
-      this.projectStep = 2
+      this.selectObj = res;
+      this.projectStep = 2;
     },
     setQuestions() {
-      this.questionDetail = ''
-      this.projectStep = 3
+      this.questionDetail = "";
+      this.projectStep = 3;
     },
     beforeUpload(file) {
-      let isLt2M = true
-      isLt2M = file.size / 1024 / 1024 < 100
+      let isLt2M = true;
+      isLt2M = file.size / 1024 / 1024 < 100;
       if (!isLt2M) {
-        this.loading = false
-        this.$message.error('上传文件大小不能超过 100MB!')
+        this.loading = false;
+        this.$message.error("上传文件大小不能超过 100MB!");
       }
 
-      return isLt2M
+      return isLt2M;
     },
     handleSuccess(response, file, fileList) {
-      this.flieSelectedList = JSON.parse(JSON.stringify(fileList))
+      this.flieSelectedList = JSON.parse(JSON.stringify(fileList));
       this.flieSelectedList.forEach((d) => {
-        d.uploadTime = moment(new Date()).format('yyyy-MM-DD HH:mm:ss')
-      })
-      this.$message.success('上传成功!')
+        d.uploadTime = moment(new Date()).format("yyyy-MM-DD HH:mm:ss");
+      });
+      this.$message.success("上传成功!");
       // this.$refs.upload.clearFiles();
       // this.crud.status.add = CRUD.STATUS.NORMAL;
       // this.crud.resetForm();
@@ -1251,41 +1261,47 @@ export default {
     },
     // 监听上传失败
     handleError(e, file, fileList) {
-      const msg = JSON.parse(e.message)
+      const msg = JSON.parse(e.message);
       this.$notify({
         title: msg.message,
-        type: 'error',
-        duration: 2500
-      })
-      this.loading = false
+        type: "error",
+        duration: 2500,
+      });
+      this.loading = false;
     },
     async goApply(target) {
-      const res = setProjectApply(this.selectRow.projectId)
+      const res = setProjectApply(this.selectRow.projectId);
       if (res) {
-        this.$message.success('申请成功!')
-        this.selectRow.applyStatus = '1'
+        this.$message.success("申请成功!");
+        this.selectRow.applyStatus = "1";
       }
     },
     submitApply() {
-      this.$confirm('确定提交申请这个项目, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("确定提交申请这个项目, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(() => {
-          this.goApply()
+          this.goApply();
           // this.goResetUserPwd([item.id]);
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消操作'
-          })
-        })
-    }
-  }
-}
+            type: "info",
+            message: "已取消操作",
+          });
+        });
+    },
+  },
+};
 </script>
+<style>
+.el-badge__content.is-fixed.is-dot {
+  right: -2px;
+  top: 27px;
+}
+</style>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .point {
@@ -1294,6 +1310,8 @@ export default {
 }
 
 .dashboard-container {
+  min-width: 1024px; // 设置的最小宽度，小于1024时，会出现滚动条
+
   color: #606266;
 
   .el-container {
@@ -1324,15 +1342,17 @@ export default {
         }
 
         .content_tr {
-          height: 120px;
+          min-height: 120px;
           width: 100%;
           margin-top: 16px;
+          overflow: hidden;
           border: 1px solid #dedee4;
           line-height: 120px;
 
           .el-row {
             .el-col {
               text-align: center;
+              white-space: nowrap;
 
               ul {
                 li {
@@ -1415,8 +1435,8 @@ export default {
             }
 
             .content_bottom {
-              height: 50px;
-
+              min-height: 50px;
+              word-break: break-all;
               font-size: 14px;
               bottom: 1%;
               line-height: 50px;
